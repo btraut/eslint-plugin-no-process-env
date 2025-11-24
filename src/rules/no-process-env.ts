@@ -36,7 +36,7 @@ const rule: TSESLint.RuleModule<'noProcessEnv', []> = {
     },
     messages: {
       noProcessEnv:
-        'Direct access to process.env is not allowed. Import from the closest env.ts file instead.',
+        'Direct access to process.env is not allowed. Import from the closest env.ts file instead (see https://github.com/btraut/eslint-plugin-no-process-env#the-envts-pattern).',
     },
     schema: [],
   },
