@@ -1,7 +1,15 @@
-import { RuleTester } from '@typescript-eslint/rule-tester';
-import tsParser from '@typescript-eslint/parser';
-import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it } from 'vitest';
-import rule from '../src/rules/no-process-env';
+import { RuleTester } from "@typescript-eslint/rule-tester";
+import tsParser from "@typescript-eslint/parser";
+import {
+  afterAll,
+  afterEach,
+  beforeAll,
+  beforeEach,
+  describe,
+  expect,
+  it,
+} from "vitest";
+import rule from "../src/rules/no-process-env";
 
 const VitestRuleTester = RuleTester as unknown as typeof RuleTester & {
   afterAll: typeof afterAll;
@@ -25,41 +33,41 @@ const ruleTester = new VitestRuleTester({
   languageOptions: {
     parser: tsParser,
     ecmaVersion: 2022,
-    sourceType: 'module',
+    sourceType: "module",
   },
 });
 
-ruleTester.run('no-process-env', rule, {
+ruleTester.run("no-process-env", rule, {
   valid: [
     {
-      name: 'allowed inside env.ts',
-      filename: '/app/env.ts',
-      code: 'const { env } = process; console.log(env.FOO);',
+      name: "allowed inside env.ts",
+      filename: "/app/env.ts",
+      code: "const { env } = process; console.log(env.FOO);",
     },
     {
-      name: 'shadowed process identifier',
-      code: 'function process() { return { env: {} }; } const { env } = process();',
+      name: "shadowed process identifier",
+      code: "function process() { return { env: {} }; } const { env } = process();",
     },
     {
-      name: 'non-env member',
-      code: 'process.version;',
+      name: "non-env member",
+      code: "process.version;",
     },
   ],
   invalid: [
     {
-      name: 'direct member access',
-      code: 'console.log(process.env.API_KEY);',
-      errors: [{ messageId: 'noProcessEnv' }],
+      name: "direct member access",
+      code: "console.log(process.env.API_KEY);",
+      errors: [{ messageId: "noProcessEnv" }],
     },
     {
-      name: 'bracket access',
+      name: "bracket access",
       code: 'const foo = process["env"].FOO;',
-      errors: [{ messageId: 'noProcessEnv' }],
+      errors: [{ messageId: "noProcessEnv" }],
     },
     {
-      name: 'destructuring env from process',
-      code: 'const { env } = process;',
-      errors: [{ messageId: 'noProcessEnv' }],
+      name: "destructuring env from process",
+      code: "const { env } = process;",
+      errors: [{ messageId: "noProcessEnv" }],
     },
   ],
 });

@@ -22,13 +22,13 @@ Tested with ESLint 8.57+, 9.x, and 10 alpha. Node 14.17+ for ESLint 8, 18.18+ fo
 
 ```ts
 // eslint.config.mjs
-import noProcessEnv from 'eslint-plugin-no-process-env';
+import noProcessEnv from "eslint-plugin-no-process-env";
 
 export default [
   {
-    plugins: { 'no-process-env': noProcessEnv },
+    plugins: { "no-process-env": noProcessEnv },
     rules: {
-      'no-process-env/no-process-env': 'error',
+      "no-process-env/no-process-env": "error",
     },
   },
 ];
@@ -39,11 +39,11 @@ export default [
 ```js
 // .eslintrc.cjs
 module.exports = {
-  plugins: ['no-process-env'],
+  plugins: ["no-process-env"],
   rules: {
-    'no-process-env/no-process-env': 'error',
+    "no-process-env/no-process-env": "error",
   },
-  extends: ['plugin:no-process-env/legacy'],
+  extends: ["plugin:no-process-env/legacy"],
 };
 ```
 
@@ -55,15 +55,15 @@ Creating a boundary around your environment configuration is a good practice. Us
 
 ```ts
 // env.ts
-import { z } from 'zod';
+import { z } from "zod";
 
 const schema = z.object({
   DATABASE_URL: z.string().url(),
-  NODE_ENV: z.enum(['development', 'test', 'production']),
+  NODE_ENV: z.enum(["development", "test", "production"]),
   DEBUG_LOGGING_ENABLED: z
     .string()
-    .default('true')
-    .transform((val) => val !== 'false'),
+    .default("true")
+    .transform((val) => val !== "false"),
 });
 
 export const ENV = schema.parse(process.env);
@@ -73,7 +73,7 @@ export const ENV = schema.parse(process.env);
 
 ```ts
 // db/client.ts
-import { ENV } from './env';
+import { ENV } from "./env";
 
 const client = new Client({
   connectionString: ENV.DATABASE_URL,
@@ -99,9 +99,9 @@ None. The rule is purposefully minimal.
 
 ## Contributing / Development
 
-- `npm run lint` — lint sources and tests  
-- `npm run test` — run rule tests (Vitest + ESLint RuleTester)  
-- `npm run build` — bundle to `dist/` via TSUP (ESM + d.ts)  
+- `npm run lint` — lint sources and tests
+- `npm run test` — run rule tests (Vitest + ESLint RuleTester)
+- `npm run build` — bundle to `dist/` via TSUP (ESM + d.ts)
 
 The `prepare` script builds automatically on install from git, which matches npm’s publishing flow.
 

@@ -36,6 +36,7 @@
     "build": "tsup",
     "clean": "rimraf dist",
     "lint": "eslint src test --ext .ts",
+    "format": "prettier --write .",
     "test": "vitest run",
     "dev": "vitest watch",
     "prepare": "npm run build"
@@ -48,6 +49,7 @@
     "@typescript-eslint/rule-tester": "^8.12.2",
     "@typescript-eslint/utils": "^8.12.2",
     "eslint": "^9.39.1",
+    "prettier": "^3.6.2",
     "rimraf": "^6.0.1",
     "tsup": "^8.5.1",
     "typescript": "^5.7.2",
